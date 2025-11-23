@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospitality Business Forum</title>
+
+    <!-- Google Font: Unbounded -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="homepage">
+
+<!-- HOME / HERO SECTION -->
+<header id="home" class="hero-header">
+    <div class="hero-overlay"></div>
+
+    <!-- NAVBAR (transparent + sticky) -->
+    <nav class="navbar navbar-expand-lg navbar-dark hbf-navbar">
+        <div class="container-fluid px-xl-5 pe-lg-3 px-3">
+            <a class="navbar-brand d-flex align-items-center" href="#home">
+                <img src="images/logo.png" alt="HBF logo" class="hbf-logo">
+            </a>
+
+            <div class="navbar-icons d-flex align-items-center gap-3 ms-auto ms-lg-0 order-lg-last">
+                <button class="icon-btn" type="button">
+                    <img src="images/search.png" alt="Search" class="icon-img">
+                </button>
+                
+                <div class="cart-wrapper position-relative">
+                    <button class="icon-btn position-relative" type="button" id="cartToggle">
+                        <img src="images/cart.png" alt="Cart" class="icon-img">
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+
+                    <div class="cart-dropdown" id="cartDropdown">
+                        <div class="cart-header">
+                            <h5>Your Cart</h5>
+                            <button class="close-cart" id="closeCart">&times;</button>
+                        </div>
+                        <div class="cart-items" id="cartItemsContainer">
+                            <p class="empty-msg">Your cart is empty.</p>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total-row">
+                                <span>Total:</span>
+                                <span id="cartTotal">$0</span>
+                            </div>
+                            <button class="speaker-cta w-100 mt-2">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="navbar-toggler ms-3 " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar" aria-controls="mainNavbar"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#featured-guests">Guests</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#partners-footer">Partners</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO CONTENT (center) -->
+<div class="hero-content container h-100">
+
+    <div class="hero-center">
+
+        <!-- LEFT SIDE TEXT -->
+        <div class="hero-left">
+            <p class="hero-date mb-3">05&nbsp; Feb, 2026</p>
+
+            <h1 class="hero-title mb-2">
+                Hospitality<br>
+                BusinessForum
+            </h1>
+
+            <p class="hero-location mb-4">
+                Hotel Raddisson, Bucuresti
+            </p>
+
+            <a href="#tickets" class="btn btn-outline-light hero-cta">
+                Grab a ticket
+            </a>
+        </div>
+
+        <!-- RIGHT SIDE VIDEO -->
+        <div class="hero-right">
+            <div class="video-box position-relative">
+                <div class="ratio ratio-16x9 video-bg"></div>
+
+                <button class="play-btn" type="button">
+                    <span class="play-triangle"></span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Bottom logos (attached to bottom of hero) -->
+    <div class="hero-bottom d-flex justify-content-between align-items-end">
+        <div class="hero-powered">
+            <p class="powered-label mb-1">Powered <br>by</p>
+            <img src="images/monarc.png" alt="Monarc Properties" class="powered-logo">
+        </div>
+        <div class="presented">
+            <p class="presented-label mb-1">Presented <br>by</p>
+            <img src="images/hbevents.png" alt="Hospitality Business Events" class="presented-logo">
+        </div>
+    </div>
+
+    <!-- Center arrow at very bottom -->
+    <button
+        class="scroll-arrow"
+        type="button"
+        onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})"
+    >
+        &#x25BC;
+    </button>
+</header>
+
+<!-- ABOUT SECTION (full screen) -->
+<section id="about" class="section-block about-section text-white">
+    <div class="section-inner container h-100 d-flex flex-column justify-content-start">
+        
+        <h2 class="section-title about-title">About Us</h2>
+
+        <div class="row align-items-center mt-3 gx-lg-5 h-100">
+            
+            <div class="col-lg-6 mb-sm-5 mb-lg-0 d-flex justify-content-center justify-content-lg-start h-100 align-items-center">
+                <div class="about-image-box">
+                    <img src="images/founders.png" alt="Founders" class="img-fluid about-img">
+                </div>
+            </div>
+
+            <div class="col-lg-6 text-center text-lg-center">
+                <div class="about-text-content">
+                    <p>
+                        Hospitality Business Forum marchează prima ediție în România a unui concept inovator, dedicat investitorilor din industria hotelieră.
+                    </p>
+                    <p>
+                        Acest eveniment unic reunește proiecte hoteliere excepționale, experți în domenii de interes, instituții și persoane implicate în finanțare, precum și echipe specializate.
+                    </p>
+                    <p>
+                        Alătură-te primei ediții în România a unui forum dedicat exclusiv investitorilor din industria ospitalității!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SPEAKERS SECTION -->
+<section id="speakers" class="section-block speakers-section text-white">
+    <div class="speakers-inner container">
+
+        <h2 class="section-title speakers-title text-center">
+            The Speakers
+        </h2>
+
+        <div class="speakers-content">
+            
+            <div class="speaker-banner speaker-banner--right">
+                <div class="speaker-text">
+                    <h3 class="speaker-name">David Jenkins</h3>
+                    <p class="speaker-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="speaker-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+                <div class="speaker-photo-wrapper">
+                    <img src="images/david-jenkins.png" alt="David Jenkins" class="speaker-photo">
+                </div>
+            </div>
+
+            <div class="speaker-banner speaker-banner--left">
+                <div class="speaker-text">
+                    <h3 class="speaker-name">David Jenkins</h3>
+                    <p class="speaker-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="speaker-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+                <div class="speaker-photo-wrapper">
+                    <img src="images/david-jenkins.png" alt="David Jenkins" class="speaker-photo">
+                </div>
+            </div>
+
+        </div> </div>
+</section>
+
+<section id="featured-guests" class="section-block featured-section text-white">
+    <div class="section-inner container">
+        
+        <h2 class="section-title featured-title">Featured Guests</h2>
+
+        <div class="row featured-grid">
+            
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="featured-card">
+                    <div class="featured-img-wrapper">
+                        <img src="images/david-jenkins.png" alt="Guest Name" class="featured-photo">
+                    </div>
+                    <h3 class="featured-name">David Jenkins</h3>
+                    <p class="featured-role">
+                        Vice President Business<br>
+                        Development Eastern Europe<br>
+                        <span class="featured-company">RADISSON HOTEL GROUP</span>
+                    </p>
+                </div>
+            </div>
+
+        </div> 
+        <div class="featured-cta-wrapper">
+             <a href="#tickets" class="speaker-cta">Sign up now</a>
+        </div>
+
+    </div>
+</section>
+<!-- TICKETS SECTION -->
+<section id="tickets" class="section-block tickets-section text-white">
+    <div class="section-inner container h-100 d-flex flex-column">
+        
+        <h2 class="section-title tickets-title">Value Packages</h2>
+
+        <div class="tickets-container">
+            
+            <div class="ticket-card">
+                <div class="ticket-header">
+                    <span class="ticket-name">EARLY BIRD - 28 Ianuarie</span>
+                    <div class="ticket-price">$229</div>
+                </div>
+                <div class="ticket-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="ticket-footer">
+                    <button class="speaker-cta add-to-cart-btn" 
+                        data-name="Early Bird Ticket" 
+                        data-price="229">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="ticket-card">
+                <div class="ticket-header">
+                    <span class="ticket-name">REGULAR - 28 Ianuarie</span>
+                    <div class="ticket-price">$329</div>
+                </div>
+                <div class="ticket-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="ticket-footer">
+                    <button class="speaker-cta add-to-cart-btn" 
+                        data-name="Regular Ticket" 
+                        data-price="329">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+
+            <div class="ticket-card ticket-card--vip">
+                <div class="ticket-header">
+                    <span class="ticket-name">VIP PACKAGE</span>
+                    <div class="ticket-price">$529</div>
+                </div>
+                <div class="ticket-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="ticket-footer">
+                    <button class="speaker-cta add-to-cart-btn" 
+                        data-name="VIP Package"
+                        data-price="529">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SCHEDULE SECTION -->
+<section id="schedule" class="section-block schedule-section text-white">
+    <div class="section-inner container h-100 d-flex flex-column">
+        
+        <h2 class="section-title schedule-title">Schedule</h2>
+
+        <div class="schedule-grid">
+            
+            <div class="schedule-card">
+                <div class="schedule-header">
+                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
+                    <h3 class="schedule-topic">Finance</h3>
+                </div>
+                <div class="schedule-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="schedule-footer">
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+            </div>
+
+            <div class="schedule-card">
+                <div class="schedule-header">
+                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
+                    <h3 class="schedule-topic">Finance</h3>
+                </div>
+                <div class="schedule-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="schedule-footer">
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+            </div>
+
+            <div class="schedule-card">
+                <div class="schedule-header">
+                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
+                    <h3 class="schedule-topic">Finance</h3>
+                </div>
+                <div class="schedule-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="schedule-footer">
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+            </div>
+
+            <div class="schedule-card">
+                <div class="schedule-header">
+                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
+                    <h3 class="schedule-topic">Finance</h3>
+                </div>
+                <div class="schedule-body">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                    </p>
+                </div>
+                <div class="schedule-footer">
+                    <a href="#tickets" class="speaker-cta">Sign up now</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="section-block contact-section text-white">
+    <div class="section-inner container h-100 d-flex flex-column">
+        
+        <h2 class="section-title contact-title">Contact</h2>
+        
+        <div class="contact-content-wrapper">
+            
+
+            <div class="contact-form-wrapper">
+                <form>
+                    
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label contact-label">First Name *</label>
+                        <input type="text" class="form-control contact-input" id="firstName" placeholder="Your First Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label contact-label">Last Name *</label>
+                        <input type="text" class="form-control contact-input" id="lastName" placeholder="Your Last Name *">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label contact-label">Your Phone Number *</label>
+                        <input type="tel" class="form-control contact-input" id="phone" placeholder="Your First Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label contact-label">Your E-mail *</label>
+                        <input type="email" class="form-control contact-input" id="email" placeholder="Your E-mail *">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="payment" class="form-label contact-label">Your payment method</label>
+                        <select class="form-select contact-input" id="payment">
+                            <option selected disabled>Select One</option>
+                            <option value="card">Credit Card</option>
+                            <option value="transfer">Bank Transfer</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="message" class="form-label contact-label">Message</label>
+                        <textarea class="form-control contact-input" id="message" rows="3" placeholder="Your Questions Here"></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn contact-submit-btn">Send !</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="partners-footer" class="section-block partners-footer-section text-white">
+    
+    <div class="partners-area">
+        <div class="container h-100 d-flex flex-column justify-content-start">
+            
+            <h2 class="section-title partners-title">Partners</h2>
+
+            <div class="partners-grid">
+                <div class="partner-logo"><img src="images/monarc.png" alt="Monarc Properties"></div>
+                <div class="partner-logo"><img src="images/hbevents.png" alt="Hospitality Business Events"></div>
+                <div class="partner-logo"><img src="images/monarc.png" alt="Monarc Properties"></div>
+                <div class="partner-logo"><img src="images/hbevents.png" alt="Hospitality Business Events"></div>
+                <div class="partner-logo"><img src="images/monarc.png" alt="Monarc Properties"></div>
+                <div class="partner-logo"><img src="images/hbevents.png" alt="Hospitality Business Events"></div>
+                <div class="partner-logo"><img src="images/monarc.png" alt="Monarc Properties"></div>
+                <div class="partner-logo"><img src="images/hbevents.png" alt="Hospitality Business Events"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row gy-4">
+                
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <img src="images/logo.png" alt="HBF Logo" class="footer-logo mb-3">
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Politicii privind Fisierele Cookies</a></li>
+                        <li><a href="#">Politica de confidentialitate</a></li>
+                        <li><a href="#">Termene si Conditii</a></li>
+                        <li><a href="#">Platforma SOL</a></li>
+                        <li><a href="#">ANPC</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <ul class="footer-contact list-unstyled">
+                        <li class="fw-bold mb-2">Hospitality Business Events SRL</li>
+                        <li>Str, Rahmaninov 5m Sect 1</li>
+                        <li>Bucuresti</li>
+                        <li>T: 0040 745 664 345</li>
+                        <li>E: forum@hbe.ro</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-12 d-flex align-items-end justify-content-lg-end justify-content-start">
+                    <div class="social-icons d-flex gap-3">
+                        <a href="#" class="social-link"><img src="images/icon-insta.png" alt="Instagram"></a>
+                        <a href="#" class="social-link"><img src="images/icon-fb.png" alt="Facebook"></a>
+                        <a href="#" class="social-link"><img src="images/icon-tt.png" alt="YouTube"></a>
+                        <a href="#" class="social-link"><img src="images/icon-linkedin.png" alt="LinkedIn"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+</section>
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"
+></script>
+
+<!-- Sticky navbar darken on scroll (optional) -->
+<script>
+    // Darken navbar when scrolling a bit
+    document.addEventListener('scroll', function () {
+        const nav = document.querySelector('.hbf-navbar');
+        if (!nav) return;
+        if (window.scrollY > 10) {
+            nav.classList.add('nav-scrolled');
+        } else {
+            nav.classList.remove('nav-scrolled');
+        }
+    });
+
+    // Highlight correct nav item based on section in view
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = document.querySelectorAll('header[id], section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+        // Map id -> nav link
+        const linkMap = {};
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href'); // e.g. "#about"
+            if (href && href.startsWith('#')) {
+                linkMap[href.substring(1)] = link;
+            }
+        });
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        // Update active classes
+                        navLinks.forEach(link =>
+                            link.classList.toggle('active', link === linkMap[id])
+                        );
+                    }
+                });
+            },
+            {
+                threshold: 0.55 // section needs to be ~55% in view
+            }
+        );
+
+        sections.forEach(sec => observer.observe(sec));
+        const navbarCollapse = document.getElementById('mainNavbar');
+    
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Check if the menu is currently expanded (visible)
+                if (navbarCollapse.classList.contains('show')) {
+                    // Create a bootstrap instance to toggle it
+                    const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                        toggle: true
+                    });
+                }
+            });
+        });
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                e.preventDefault(); // Stop default anchor jump
+                
+                // 1. Temporarily DISABLE scroll snapping
+                document.documentElement.style.scrollSnapType = 'none';
+                
+                // 2. Calculate position
+                // We grab the height of the navbar dynamically so it's always accurate
+                const navHeight = document.querySelector('.hbf-navbar').offsetHeight || 0;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+                // 3. Scroll there smoothly
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                // 4. Re-enable scroll snapping after animation finishes (approx 1000ms)
+                setTimeout(() => {
+                    document.documentElement.style.scrollSnapType = '';
+                }, 1000);
+            }
+        });
+    });
+</script>
+<script>
+    // --- CART STATE ---
+    let cart = [];
+
+    // --- DOM ELEMENTS ---
+    const cartToggle = document.getElementById('cartToggle');
+    const closeCart = document.getElementById('closeCart');
+    const cartDropdown = document.getElementById('cartDropdown');
+    const cartItemsContainer = document.getElementById('cartItemsContainer');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.getElementById('cartCount');
+    const addToCartBtns = document.querySelectorAll('.add-to-cart-btn');
+
+    // --- FUNCTIONS ---
+
+    function toggleCart() {
+        cartDropdown.classList.toggle('show');
+    }
+
+    function addToCart(name, price) {
+        const existingItem = cart.find(item => item.name === name);
+
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            cart.push({
+                name: name,
+                price: parseFloat(price),
+                quantity: 1
+            });
+        }
+        updateCartUI();
+        // Automatically open cart to show feedback
+        if(!cartDropdown.classList.contains('show')) {
+            cartDropdown.classList.add('show');
+        }
+    }
+
+    function removeItem(name) {
+        cart = cart.filter(item => item.name !== name);
+        updateCartUI();
+    }
+
+    function changeQuantity(name, change) {
+        const item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                removeItem(name);
+            } else {
+                updateCartUI();
+            }
+        }
+    }
+
+    // Update UI (Render HTML & Totals)
+    function updateCartUI() {
+        // Update Badge
+        const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountEl.textContent = totalCount;
+
+        // Update Total
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        cartTotalEl.textContent = '$' + totalPrice;
+
+        // Render Items
+        cartItemsContainer.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-msg">Your cart is empty.</p>';
+            return;
+        }
+
+        cart.forEach(item => {
+            const itemEl = document.createElement('div');
+            itemEl.classList.add('cart-item');
+            // We use data attributes (data-name, data-action) instead of onclick here
+            itemEl.innerHTML = `
+                <div class="cart-item-info">
+                    <h6>${item.name}</h6>
+                    <div class="cart-item-price">$${item.price}</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" data-action="decrease" data-name="${item.name}">-</button>
+                        <span class="cart-item-qty">${item.quantity}</span>
+                        <button class="qty-btn" data-action="increase" data-name="${item.name}">+</button>
+                    </div>
+                    <button class="remove-btn" data-action="remove" data-name="${item.name}">&times;</button>
+                </div>
+            `;
+            cartItemsContainer.appendChild(itemEl);
+        });
+    }
+
+    // --- EVENT LISTENERS ---
+
+    // 1. Toggle Button
+    cartToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCart();
+    });
+
+    // 2. Close 'X' Button
+    closeCart.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleCart();
+    });
+
+    // 3. EVENT DELEGATION FOR CART ACTIONS (The Fix)
+    // We listen on the container, not the individual buttons
+    cartItemsContainer.addEventListener('click', (e) => {
+        // Stop the click from bubbling up to the document (which would close the cart)
+        e.stopPropagation();
+
+        const btn = e.target.closest('button');
+        if (!btn) return;
+
+        const name = btn.dataset.name;
+        const action = btn.dataset.action;
+
+        if (action === 'decrease') changeQuantity(name, -1);
+        if (action === 'increase') changeQuantity(name, 1);
+        if (action === 'remove') removeItem(name);
+    });
+
+    // 4. Close cart when clicking OUTSIDE
+    document.addEventListener('click', (e) => {
+        // If the click is NOT inside the dropdown AND NOT on the toggle button
+        if (!cartDropdown.contains(e.target) && !cartToggle.contains(e.target)) {
+            cartDropdown.classList.remove('show');
+        }
+    });
+
+    // 5. Prevent clicks inside the dropdown (empty space) from closing it
+    cartDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // 6. Add to Cart Buttons
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // e.stopPropagation(); // Optional: prevent triggering other clicks
+            const name = btn.getAttribute('data-name');
+            const price = btn.getAttribute('data-price');
+            addToCart(name, price);
+        });
+    });
+
+</script>
+</body>
+</html>

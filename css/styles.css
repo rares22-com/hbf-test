@@ -1,0 +1,2416 @@
+/* ------------ Global ------------ */
+html, body {
+    height: 100%;
+    width: 100%; /* Ensure width is strictly 100% */
+    max-width: 100vw; /* Never exceed viewport width */
+    overflow-x: clip;
+    scroll-behavior: smooth;
+    /* snap one full page at a time */
+    scroll-snap-type: y mandatory;
+}
+
+body.homepage {
+    margin: 0;
+    font-family: "Unbounded", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #ffffff;
+    background-color: #000000;
+    padding-top: 0px; /* space for sticky navbar */
+}
+
+/* Each section = full screen, snap to start */
+.hero-header,
+.section-block {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    /* KEY FIX: This forces the browser to STOP at this section, 
+       preventing it from skipping over it during fast scrolls. */
+    scroll-snap-type: y proximity;
+    scroll-snap-stop: always;
+}
+
+.section-block {
+    scroll-margin-top: 96px; /* same as body padding-top / navbar height */
+}
+
+/* Sections content centered */
+.section-block {
+    display: flex;
+    align-items: center;
+}
+
+.section-inner {
+    max-width: 1100px;
+}
+
+.section-title {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.section-text {
+    max-width: 700px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+}
+
+/* ------------ Hero + background ------------ */
+.hero-header {
+    position: relative;
+    height: 100vh;  /* instead of min-height: 100vh */
+    background: url("../images/background.png") center center / cover no-repeat;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    /* less dark now */
+    background: radial-gradient(circle at top right, rgba(0,0,0,0.15), transparent 55%),
+                linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.7));
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;             /* fill the whole header */
+    display: flex;            /* make this a flex container */
+    align-items: center;      /* vertical center */
+    justify-content: center;  /* horizontal center wrapper */
+    padding-top: 0;           /* navbar spacing handled by body padding-top */
+    padding-bottom: 0;
+}
+
+/* ------------ Navbar (sticky) ------------ */
+.hbf-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: transparent;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hbf-navbar.nav-scrolled {
+    background: rgba(0, 0, 0, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.hbf-logo {
+    height: 7vh;
+    width: auto;
+}
+
+/* NAV LINKS: size 28, bold */
+.navbar-nav .nav-link {
+    font-weight: 300;
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.65);
+    position: relative;
+    padding-inline: 1.2rem;
+}
+
+/* Brighter on hover */
+.navbar-nav .nav-link:hover {
+    color: rgba(255,255,255,0.95);
+}
+
+/* ACTIVE (Home): whiter, but NO underline bar now */
+.navbar-nav .nav-link.active {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* remove any ::after underline we had before */
+.navbar-nav .nav-link::after {
+    content: none !important;
+}
+
+/* Icons on right */
+.navbar-icons .icon-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon-img {
+    width: 22px;
+    height: 22px;
+    display: block;
+}
+
+.icon-btn:hover .icon-img {
+    filter: brightness(1.2);
+}
+
+.cart-count {
+    position: absolute;
+    top: -0.3rem;
+    right: -0.4rem;
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 0.65rem;
+    border-radius: 999px;
+    padding: 0 0.25rem;
+}
+
+
+.hero-date {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: clamp(2.8rem, 4vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.hero-location {
+    font-size: 1.6rem;
+    color: rgba(255,255,255,0.9);
+}
+
+/* CTA button */
+.hero-cta {
+    border-radius: 0;
+    border-width: 2px;
+    padding: 0.7rem 2.3rem;
+    font-weight: 600;
+}
+
+.hero-cta:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* ------------ Video box ------------ */
+
+
+.video-bg {
+    background-color: #000000;
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+/* Play button: ONLY triangle, no circle */
+.play-btn {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 72px;
+    height: 72px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid #ffffff;   /* white triangle */
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    margin-left: 3px;                  /* optical centering */
+}
+
+.play-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ------------ Bottom logos + arrow ------------ */
+.hero-bottom {
+    position: absolute;
+    left: 2rem;
+    right: 2rem;
+    bottom: 3.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hero-powered,
+.presented {
+    display: flex;
+    align-items: center;
+    gap: 10px;          /* space between text and icon */
+    text-align: left;   /* prevent stacking */
+}
+
+.powered-label,
+.presented-label {
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+
+.powered-logo{
+    height: 5vh; /* cleaner size next to text */
+    width: auto;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+.presented-logo {
+    height: 4vh; /* cleaner size next to text */
+    width: auto;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+/* Arrow dead-center bottom */
+.scroll-arrow {
+    position: absolute;
+    left: 50%;
+    bottom: 1.2rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.scroll-arrow:hover {
+    border-color: #ffffff;
+}
+
+/* ------------ Responsive tweaks ------------ */
+@media (max-width: 991.98px) {
+    .hero-content {
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    /* shrink navbar text on small screens so 28px isn't too huge */
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        padding-inline: 0.8rem;
+    }
+
+    .hbf-logo {
+        height: 40px;
+    }
+
+    .hero-bottom {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start;
+    }
+}
+.hero-center {
+    width: 100%;
+    max-width: 1200px;                  /* keeps the two blocks nicely centered */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* more generous default gap, scales with screen */
+    gap: clamp(70px, 16vw, 260px);
+
+    padding-inline: 1.5rem;
+    margin-inline: auto;
+}
+
+/* Medium screens: slightly smaller gap so it doesn’t feel too stretched */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .hero-center {
+        gap: 80px;
+    }
+}
+
+/* Tablets & phones: stack text above video instead of side by side */
+@media (max-width: 991.98px) {
+    .hero-center {
+        flex-direction: column;
+        align-items: flex-start;   /* text and video aligned to left */
+        gap: 32px;                 /* vertical space between them */
+    }
+
+    .hero-right {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .video-box {
+        width: 100%;
+        max-width: 480px;          /* don’t let it get too huge */
+    }
+}
+
+/* Very small phones: a bit tighter */
+@media (max-width: 575.98px) {
+    .hero-center {
+        gap: 24px;
+    }
+}
+
+/* LEFT block */
+.hero-left {
+    max-width: 480px;
+}
+
+/* RIGHT block */
+.hero-right {
+    display: flex;
+    justify-content: center;
+}
+
+/* Video width scales responsively */
+.video-box {
+    width: clamp(320px, 40vw, 640px); /* bigger video */
+}
+
+.hbf-navbar .navbar-nav {                                  /* take available space between logo and icons */
+    justify-content: center;                   /* center the group */
+    flex: 0 1 auto; 
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Keep your responsive gap */
+    gap: clamp(1rem, 3vw, 4rem);        /* more space between items, responsive */
+}
+
+/* Keep icons pinned to the right without squeezing the center */
+.navbar-icons {
+    margin-left: auto;
+}
+
+@media (min-width: 1600px) and (max-width: 1900.98px) {
+    .hbf-navbar .navbar-nav {
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 1300px) and (max-width: 1600px) {
+    .hbf-navbar .navbar-nav {
+        gap: 1rem;
+    }
+    .navbar-nav .nav-link {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .hbf-navbar .navbar-nav {
+        gap: 0.2rem;
+    }
+    .navbar-nav .nav-link {
+        font-size: 18px;
+    }
+    .hbf-logo {
+        height: 4vh;
+    }
+}
+
+/* =============== SPEAKERS SECTION =============== */
+
+.speakers-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 700px;
+    
+    display: flex;
+    flex-direction: column;
+    /* KEY FIX: Align main container to top so title stays up */
+    justify-content: flex-start; 
+    
+    padding-top: 5vh; 
+    padding-bottom: 2vh;
+}
+
+.speakers-inner {
+    width: 100%;
+    max-width: 1900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    /* Use full height so we can distribute children */
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+}
+
+.speakers-title {
+    font-size: clamp(2.5rem, 4vw, 4rem); 
+    font-weight: 700;
+    text-align: center;
+    /* Reduced margin because the flex spacer handles the gap now */
+    margin-bottom: 2vh; 
+    flex-shrink: 0; 
+}
+
+/* NEW WRAPPER: Takes remaining height and centers banners */
+.speakers-content {
+    flex: 1; /* Grow to fill space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center banners vertically */
+    
+    /* Gap between the two banners */
+    gap: clamp(1rem, 3vh, 3rem); 
+}
+
+/* Shared banner style */
+.speaker-banner {
+    width: 100%;
+    flex: 0 0 auto; 
+    
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    
+    gap: clamp(2rem, 5vw, 6rem);
+}
+
+/* --- TOP BANNER --- */
+.speaker-banner--right {
+    flex-direction: row;
+}
+
+/* --- BOTTOM BANNER --- */
+.speaker-banner--left {
+    flex-direction: row-reverse;
+    
+    /* Reduced padding for separator */
+    padding-top: clamp(1rem, 2vh, 3rem);
+    border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Text Container */
+.speaker-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center content horizontally */
+    text-align: center; 
+}
+
+/* Typography */
+.speaker-name {
+    font-size: clamp(2.2rem, 4vw, 3.5rem); 
+    font-weight: 700;
+    margin-bottom: 0.5vh; 
+    line-height: 1.1;
+}
+
+.speaker-role {
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    margin-bottom: 1.5vh; 
+    line-height: 1.3;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.speaker-company {
+    display: block;
+    margin-top: 0.5vh;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* CTA button */
+.speaker-cta {
+    display: inline-block;
+    text-decoration: none;
+    padding: 0.7rem 2rem;
+    border-radius: 999px;
+    border: 1px solid #f4b44c;
+    background: #000000;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.5;
+}
+
+.speaker-cta:hover {
+    background: #f4b44c;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Speaker Photo Wrapper */
+.speaker-photo-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.speaker-photo {
+    /* Scale by HEIGHT (vh) */
+    height: clamp(200px, 28vh, 400px);
+    
+    width: auto;          
+    max-width: 500px;     
+    
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+/* --------- Responsive Mobile --------- */
+@media (max-width: 991.98px) {
+    .speakers-section {
+        height: auto;      
+        min-height: 100vh;
+        padding: 5rem 0;   
+        justify-content: center; 
+    }
+    
+    .speakers-content {
+        gap: 3rem;
+        justify-content: flex-start; /* Standard stacking on mobile */
+    }
+
+    .speaker-banner {
+        padding: 2rem 1rem;
+        gap: 2rem;
+        flex-direction: column-reverse !important;
+        text-align: center !important;
+    }
+    
+    .speaker-banner--left {
+         border-top: none;
+         padding-top: 2rem;
+         position: relative;
+    }
+    
+    .speaker-banner--left::before {
+        content: "";
+        display: block;
+        width: 50%;
+        height: 1px;
+        background: rgba(255,255,255,0.2);
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .speaker-photo {
+        width: 260px; 
+        height: auto;
+        margin-bottom: 1rem;
+    }
+}
+/* Phones */
+@media (max-width: 575.98px) {
+    .speakers-title {
+        font-size: 1.7rem;
+    }
+
+    .speaker-name {
+        font-size: 1.5rem;
+    }
+
+    .speaker-banner {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+/* =============== FEATURED GUESTS SECTION =============== */
+
+.featured-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 700px; /* Reduced min-height slightly */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+}
+
+.featured-section .section-inner {
+    width: 100%;
+    max-width: 1400px; /* Reduced container width to keep things tighter */
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.featured-title {
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem); /* Slightly smaller title */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3vh; 
+    flex-shrink: 0;
+}
+
+/* --- HYBRID LAYOUT SYSTEM --- */
+
+/* 1. Default (Mobile/Tablet): Use FLEX */
+.featured-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center; 
+    
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+    
+    /* Mobile/Tablet Gap */
+    gap: 2rem;
+    
+    flex-grow: 1; 
+}
+
+/* 2. Desktop (Large Screens): Switch to GRID */
+@media (min-width: 992px) {
+    .featured-grid {
+        display: grid;
+        /* Force exactly 3 columns */
+        grid-template-columns: repeat(3, 1fr);
+        
+        /* Reduced gap: Keeps items closer together */
+        gap: clamp(1.5rem, 3vw, 4rem); 
+    }
+    
+    .featured-grid > [class*='col-'] {
+        width: auto !important;
+        max-width: none !important;
+        flex: none !important;
+    }
+}
+
+/* Card Styling */
+.featured-card {
+    text-align: center;
+    padding: 0;
+    transition: transform 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.featured-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Image Wrapper - SCALED DOWN */
+.featured-img-wrapper {
+    /* Old Max: 380px 
+       New Max: 260px -> Much more contained
+    */
+    height: clamp(140px, 18vh, 260px);
+    
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 1vh;
+}
+
+.featured-photo {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+}
+
+/* Typography - SCALED DOWN */
+.featured-name {
+    /* Reduced max size from 2.5rem to 2rem */
+    font-size: clamp(1.3rem, 1.6vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 0.5vh;
+    line-height: 1.1;
+}
+
+.featured-role {
+    /* Smaller, cleaner role text */
+    font-size: clamp(0.8rem, 0.9vw, 1rem);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+.featured-company {
+    display: block;
+    margin-top: 0.5vh;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+}
+
+/* Button Wrapper */
+.featured-cta-wrapper {
+    text-align: center;
+    margin-top: 2vh;
+    flex-shrink: 0;
+    margin-bottom: 2vh;
+}
+
+/* --- Specific Mobile Tweaks --- */
+@media (max-width: 991.98px) {
+    .featured-section {
+        height: auto; 
+        min-height: 100vh;
+        padding: 5rem 0;
+    }
+    
+    .featured-grid {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .featured-grid {
+        gap: 3rem;
+    }
+}
+/* =============== TICKETS SECTION =============== */
+
+.tickets-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 700px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    padding-top: 3vh; /* Reduced padding */
+    padding-bottom: 2vh;
+}
+
+.tickets-section .section-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tickets-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2vh; /* Reduced margin */
+    flex-shrink: 0;
+}
+
+/* Container for the cards */
+.tickets-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center; 
+    
+    /* KEY FIX: Reduced gap to pull rows closer together */
+    gap: clamp(1.5rem, 4vh, 5rem); 
+    
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+/* Individual Card */
+.ticket-card {
+    position: relative;
+    
+    border: 1px solid rgba(244, 180, 76, 0.3);
+    border-radius: 2.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    
+    /* Slightly narrower max-width */
+    width: clamp(280px, 35vw, 420px);
+    
+    /* KEY FIX: Compact padding inside the card */
+    padding: 3vh 2vh 5vh 2vh; 
+    
+    /* Reduced margin for button overlap */
+    margin-bottom: 1.5rem; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.ticket-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(244, 180, 76, 0.8);
+}
+
+.ticket-card--vip {
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+}
+
+/* Header: Name & Price */
+.ticket-header {
+    margin-bottom: 1rem;
+}
+
+.ticket-name {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.ticket-price {
+    font-family: "Unbounded", sans-serif;
+    font-size: clamp(2.5rem, 3.5vw, 3.5rem); /* Slightly smaller font */
+    font-weight: 500;
+    line-height: 1;
+    color: #ffffff;
+}
+
+/* Body: Description Text */
+.ticket-body p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0; 
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer: The Button Container */
+.ticket-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    transform: translateY(50%);
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* Ensure the button has a background */
+.ticket-footer .speaker-cta {
+    background-color: #000000; 
+    padding: 0.7rem 2.2rem;
+}
+
+.ticket-footer .speaker-cta:hover {
+    background-color: #f4b44c; 
+    color: #000;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 991.98px) {
+    .tickets-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 0;
+    }
+
+    .tickets-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem; 
+    }
+
+    .ticket-card {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* =============== SCHEDULE SECTION =============== */
+
+.schedule-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 800px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    padding-top: 3vh;
+    padding-bottom: 2vh;
+    
+}
+
+.schedule-section .section-inner {
+    width: 100%;
+    max-width: 1600px; /* Increased container width to allow wider grid */
+    margin: 0 auto;
+    padding: 0 2rem;
+    
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2vh; 
+    flex-shrink: 0;
+}
+
+.schedule-grid {
+    display: grid;
+    /* Force 2 columns */
+    grid-template-columns: repeat(2, 1fr); 
+    
+    /* Responsive spacing */
+    gap: clamp(2rem, 3vw, 4rem);
+    row-gap: clamp(2rem, 4vh, 3rem); /* More vertical gap for the buttons to hang comfortably */
+    
+    /* CENTERING FIX: Ensure the grid itself is centered */
+    justify-content: center;
+    justify-items: center; /* Centers the cards inside the grid cells */
+    
+    /* SHAPE FIX: Wider max-width allows cards to be rectangles instead of towers */
+    max-width: 1400px; 
+    width: 100%;
+    margin: 0 auto; /* Essential for centering the block */
+    
+    /* Center vertically in remaining space */
+    align-content: center; 
+    flex-grow: 1;
+}
+
+/* Individual Card */
+.schedule-card {
+    position: relative; 
+    
+    border: 1px solid rgba(244, 180, 76, 0.3);
+    border-radius: 2.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    
+    /* SHAPE FIX: Reduced top/bottom padding to make it less "tall" */
+    padding: 2.5rem 2rem 3.5rem 2rem;
+    
+    
+    /* SHAPE FIX: Allow width to stretch to fill the wider grid */
+    width: clamp(300px, 30vw, 550px);
+    
+    margin-bottom: 2rem; 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    
+    /* Ensure equal height for all cards in the row */
+    height: clamp(300px, 30vh, 450px);
+}
+
+.schedule-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(244, 180, 76, 0.8);
+}
+
+/* Content Styling */
+.schedule-header {
+    margin-bottom: 1.5rem;
+}
+
+.schedule-date {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.schedule-topic {
+    font-family: "Unbounded", sans-serif;
+    font-size: clamp(2rem, 2.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #ffffff;
+    margin: 0;
+}
+
+.schedule-body p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 0;
+    /* SHAPE FIX: Widen the text area so text wraps less (making card shorter) */
+    max-width: 90%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer: The Button Container */
+.schedule-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0; 
+    width: 100%;
+    transform: translateY(50%); 
+    
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+
+.schedule-footer .speaker-cta {
+    background-color: #000000; 
+    padding: 0.8rem 2.5rem;
+}
+
+.schedule-footer .speaker-cta:hover {
+    background-color: #f4b44c; 
+    color: #000;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 991.98px) {
+    .schedule-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 5rem 0;
+    }
+
+    .schedule-grid {
+        /* Switch to 1 column on tablet/mobile */
+        grid-template-columns: 1fr;
+        gap: 4rem; 
+        max-width: 500px;
+    }
+}
+
+/* =============== CONTACT SECTION =============== */
+
+.contact-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    /* Needs a bit more min-height because forms are tall */
+    min-height: 900px; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align content from top */
+    
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.contact-section .section-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Title Styling - Matching other sections */
+.contact-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2vh; 
+    flex-shrink: 0; /* Prevents title from shrinking */
+}
+
+/* Wrapper to center the form vertically in the remaining space */
+.contact-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers form vertically */
+    align-items: center;     /* Centers form horizontally */
+    width: 100%;
+}
+
+.contact-desc {
+    max-width: 600px;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+.contact-form-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Labels */
+.contact-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    color: #ffffff;
+}
+
+/* Inputs & Textarea */
+.contact-input {
+    background-color: #000000; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-input:focus {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #f4b44c; 
+    box-shadow: 0 0 0 0.25rem rgba(244, 180, 76, 0.25);
+}
+
+.contact-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+select.contact-input {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+}
+
+/* Submit Button */
+.contact-submit-btn {
+    /* Match .speaker-cta styles */
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #f4b44c;
+    
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.8rem 4rem; 
+    border-radius: 999px; /* Fully round pill shape */
+    
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.contact-submit-btn:hover {
+    background: #f4b44c; /* Gold background on hover */
+    color: #000000;      /* Black text on hover */
+    transform: scale(1.05);
+}
+
+/* Mobile Tweak */
+@media (max-width: 991.98px) {
+    .contact-section {
+        height: auto; /* Allow scrolling on mobile */
+        min-height: 100vh;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    
+    .contact-submit-btn {
+        width: 100%; 
+    }
+}
+
+/* =============== PARTNERS & FOOTER COMBINED SECTION =============== */
+
+.partners-footer-section {
+    /* Main wrapper: No padding, let children handle backgrounds */
+    padding: 0;
+    
+    /* Fixed full-screen height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 700px; 
+    
+    display: flex;
+    flex-direction: column;
+}
+
+/* 1. PARTNERS AREA (Top Part) */
+.partners-area {
+    /* Takes up all remaining space above the footer */
+    flex: 1;
+    
+    /* Apply the standard theme background here */
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    
+    /* Flex content centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    
+    /* Add padding for breathing room inside */
+    padding-top: 5vh;
+    padding-bottom: 2vh;
+    width: 100%;
+}
+
+.partners-title {
+    /* Matches other section titles */
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 4vh; 
+    flex-shrink: 0;
+}
+
+/* Logo Grid */
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+    /* Responsive Spacing */
+    gap: clamp(1.5rem, 4vw, 5rem);
+    row-gap: clamp(2rem, 5vh, 6rem);
+    
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.partner-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.partner-logo img {
+    /* Small logos as requested */
+    height: clamp(35px, 6vw, 90px);
+    
+    width: auto;
+    object-fit: contain;
+    opacity: 0.7;
+    filter: brightness(0) invert(1); 
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.partner-logo img:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* 2. FOOTER AREA (Bottom Part) */
+.main-footer {
+    /* Solid Black Background */
+    background-color: #000000;
+    
+    /* Gold separator line on top */
+    border-top: 1px solid rgba(244, 180, 76, 0.3);
+    
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    flex-shrink: 0; 
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.footer-logo {
+    /* BIGGER LOGO */
+    height: 10vh;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footer-links li,
+.footer-contact li {
+    margin-bottom: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #f4b44c; 
+}
+
+/* Social Icons */
+.social-link img {
+    height: 24px;
+    width: auto;
+    filter: brightness(0) invert(1); 
+    transition: transform 0.2s ease;
+}
+
+.social-link:hover img {
+    transform: translateY(-3px);
+}
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 991.98px) {
+    .partners-footer-section {
+        height: auto; 
+        min-height: 100vh;
+    }
+    
+    .partners-area {
+        padding-top: 5rem;
+        padding-bottom: 4rem;
+    }
+
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 3rem;
+    }
+    
+    .main-footer {
+        text-align: left;
+    }
+    
+    .col-lg-2 {
+        justify-content: flex-start !important;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .partners-grid {
+        gap: 2rem;
+    }
+    .partner-logo img {
+        height: clamp(30px, 12vw, 60px); 
+    }
+    .footer-logo {
+        height: 60px;
+    }
+}
+/* =============== ABOUT SECTION =============== */
+
+.about-section {
+    background: url("../images/speakers-bg.png") center center / cover no-repeat;
+    background-color: #000;
+    
+    /* Fixed height minus navbar */
+    height: calc(100vh - 96px);
+    min-height: 800px;
+    
+    display: flex;
+    flex-direction: column;
+    /* KEY FIX: Align content to the TOP */
+    justify-content: flex-start;
+    
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    position: relative;
+}
+
+/* Dark overlay */
+.about-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    
+    z-index: 0;
+}
+
+.about-section .section-inner {
+    position: relative;
+    z-index: 1; 
+    width: 100%;
+    /* Ensure container fills height so we can center image/text vertically in the remaining space */
+    flex: 1; 
+    max-width: 1800px;
+}
+
+.about-title {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 700;
+    text-align: center;
+    /* Push content down */
+    margin-bottom: 4vh; 
+    flex-shrink: 0;
+}
+
+/* The Image Frame */
+.about-image-box {
+    border: 0px;
+    padding: 0; 
+    display: inline-block;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Aligns image to left */
+}
+
+.about-img {
+    display: block;
+    width: 100%;
+    height: 70vh;
+    
+    /* KEY FIX: Made image bigger */
+    max-height: 75vh; 
+    
+    object-fit: contain;
+    /* Optional: Scale it up slightly if the image file itself is small */
+    /* transform: scale(1.1); */ 
+}
+
+
+
+.about-text-content p {
+    font-size: clamp(1.1rem, 1.3vw, 1.5rem);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,1); 
+}
+
+
+
+/* =============== CART DROPDOWN =============== */
+
+/* Wrapper to position dropdown relative to icon */
+.cart-wrapper {
+    position: relative;
+}
+
+.cart-dropdown {
+    position: absolute;
+    top: 150%; /* Pushes it down below the icon */
+    right: 0;
+    width: 320px;
+    background-color: #000000;
+    border: 1px solid #f4b44c;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    
+    /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+/* Class to show it via JS */
+.cart-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.cart-header h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.cart-items {
+    max-height: 300px;
+    overflow-y: auto; /* Scroll if too many items */
+}
+
+.empty-msg {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+/* Individual Cart Item */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.cart-item-info h6 {
+    font-size: 0.9rem;
+    margin: 0 0 0.3rem 0;
+    color: #fff;
+}
+
+.cart-item-price {
+    font-size: 0.85rem;
+    color: #f4b44c;
+    font-weight: 600;
+}
+
+/* Quantity Controls */
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.qty-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+.qty-btn:hover {
+    color: #f4b44c;
+}
+
+.cart-item-qty {
+    font-size: 0.9rem;
+    min-width: 15px;
+    text-align: center;
+}
+
+.remove-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    font-size: 1.2rem;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    color: #ff4d4d;
+}
+
+/* Footer */
+.cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#cartTotal {
+    color: #f4b44c;
+}
+
+/* Mobile Tweak: Dropdown full width on small screens */
+@media (max-width: 575.98px) {
+    .cart-dropdown {
+        width: 280px;
+        right: -50px; /* Shift slightly to stay on screen */
+    }
+}
+
+/* =============== MOBILE NAVBAR OPTIMIZATION =============== */
+@media (max-width: 991.98px) {
+    
+    /* (Previous styles for background and spacing...) */
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.7); 
+        backdrop-filter: blur(10px); 
+        padding: 2rem 1rem; 
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        max-height: 80vh;
+        overflow-y: auto;
+        
+        /* Ensure the menu sits ON TOP of the rest of the content */
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    /* Link Styles */
+    .navbar-nav {
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem !important; 
+        margin-bottom: 1rem;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 1.4rem;
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    /* --- CART DROPDOWN POSITION FIX --- */
+    /* Since icons are now top-right, align dropdown to the right so it doesn't overflow */
+    .cart-dropdown {
+        left: auto;      /* Reset left */
+        right: -10px;    /* Align with right edge of container approx */
+        transform: none; /* Reset center transform */
+        top: 140%;       /* Push down slightly */
+        width: 280px;    
+    }
+    
+    /* Reset transform for the show state too */
+    .cart-dropdown.show {
+        transform: none;
+    }
+}
+
+@media (max-width: 991.98px) {
+    
+    /* 1. Main Container Layout */
+    .hero-center {
+        /* Reverse column: Puts the Video (2nd item) on TOP, Text (1st item) BOTTOM */
+        flex-direction: column-reverse; 
+        
+        /* Center everything */
+        align-items: center;
+        text-align: center;
+        
+        /* Spacing and Padding */
+        gap: 2rem;
+        padding-top: 7rem; /* Push down from navbar */
+        padding-bottom: 8rem; /* Reserve space for bottom logos so they don't overlap */
+    }
+
+    /* 2. Text Area (Now on Bottom) */
+    .hero-left {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the "Grab a ticket" button */
+    }
+
+    /* 3. Video Area (Now on Top) */
+    .hero-right {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    /* 4. Video Box Sizing */
+    .video-box {
+        width: 100%;
+        max-width: 500px; /* Ensures it looks good on mobile/tablet */
+    }
+    
+    /* 5. Adjust Bottom Logos for Mobile */
+    .hero-bottom {
+        padding: 0 1rem;
+    }
+    
+    /* Make the logos smaller/cleaner on phone */
+    .powered-label, .presented-label {
+        font-size: 0.8rem;
+    }
+    
+    .powered-logo { height: 35px; }
+    .presented-logo { height: 30px; }
+}
+
+/* =============== HERO PHONE OPTIMIZATION (Small Screens) =============== */
+
+@media (max-width: 575.98px) {
+    
+    /* 1. Main Layout & Spacing */
+    .hero-center {
+        padding-top: 6rem;
+        /* Increase bottom padding to make room for the stacked logos */
+        padding-bottom: 12rem; 
+        gap: 1.5rem;
+    }
+
+    /* 2. Typography & Button */
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+    }
+
+    .hero-date {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .hero-location {
+        font-size: 0.9rem;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .hero-cta {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* 3. Fix Bottom Logos - VERTICAL STACK */
+    .hero-bottom {
+        /* Stack them vertically so they never overlap */
+        flex-direction: column; 
+        align-items: center;
+        justify-content: flex-end;
+        
+        gap: 0.8rem; /* Space between "Powered by" and "Presented by" */
+        
+        /* Position them higher so they don't hit the scroll arrow */
+        bottom: 4rem; 
+        left: 0;
+        width: 100%;
+        padding: 0;
+    }
+
+    .hero-powered, 
+    .presented {
+        /* Keep text and logo side-by-side */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Text Styling */
+    .powered-label, 
+    .presented-label {
+        font-size: 0.7rem;
+        line-height: 1.1;
+        text-align: right;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Logo Sizing */
+    .powered-logo, 
+    .presented-logo {
+        height: 28px; /* Good size for mobile */
+        width: auto;
+        margin: 0;
+        padding: 0; /* Remove desktop padding */
+    }
+}
+/* =============== ABOUT SECTION RESPONSIVE =============== */
+
+/* 1. TABLET & SMALL LAPTOPS (Max 991px) */
+@media (max-width: 991.98px) {
+    .about-section {
+        /* FIXED HEIGHT logic for the main section wrapper */
+        height: calc(100vh - 71px); 
+        min-height: 700px; 
+        padding: 3rem 0;
+        justify-content: center;
+    }
+
+    /* KEY FIX: Reset internal heights so content doesn't get crushed/pushed off */
+    .about-section .section-inner,
+    .about-section .row,
+    .about-section .col-lg-6 {
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    /* Center the Image */
+    .about-image-box {
+        justify-content: center; 
+        margin-bottom: 3vh; 
+    }
+
+    .about-img {
+        height: auto;
+        /* Restrict height so there is room for text below it */
+        max-height: 35vh; 
+        width: auto;
+        max-width: 100%;
+    }
+
+    /* Center the Text and ensure it is visible */
+    .about-text-content {
+        text-align: center !important;
+        padding-left: 0; 
+        display: block;
+        margin-top: 1rem;
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    /* ... (keep your existing phone styles here) ... */
+    .about-section {
+        padding: 3rem 0;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+    
+    /* Ensure reset applies here too */
+    .about-section .section-inner,
+    .about-section .row,
+    .about-section .col-lg-6 {
+        height: auto !important; 
+        min-height: 0 !important;
+    }
+
+    .about-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem; 
+    }
+
+    .about-image-box {
+        margin-bottom: 1.5rem; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .about-img {
+        max-height: 220px; 
+        width: auto;
+        max-width: 100%;
+    }
+
+    .about-text-content {
+        text-align: center !important; 
+        padding: 0 1rem; 
+    }
+
+    .about-text-content p {
+        font-size: 0.9rem; 
+        line-height: 1.5;
+        margin-bottom: 1rem; 
+    }
+}
+@media (max-width: 991.98px) {
+    .section-block {
+        /* Adjust this to match your actual tablet navbar height */
+        scroll-margin-top: 81px; 
+    }
+}
+
+/* Phone (Navbar is much smaller here) */
+@media (max-width: 575.98px) {
+    .section-block {
+        /* Adjust this to match your actual mobile navbar height */
+        scroll-margin-top: 71px; 
+    }
+}
+/* =============== SPEAKERS PHONE OPTIMIZATION (Max 575px) =============== */
+
+@media (max-width: 575.98px) {
+    
+    .speakers-section {
+        /* Unlock height for scrolling */
+        height: auto; 
+        min-height: 100vh;
+        
+        padding-top: 6rem; /* Match other sections */
+        padding-bottom: 4rem;
+        justify-content: flex-start;
+    }
+
+    /* Main Title */
+    .speakers-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Container for the two speakers */
+    .speakers-content {
+        /* Remove flex:1 so it doesn't force stretching */
+        flex: 0 1 auto; 
+        gap: 4rem; /* Space between the two speaker blocks */
+    }
+
+    /* Individual Banner Wrapper */
+    .speaker-banner {
+        /* Remove padding to save horizontal space */
+        padding: 0; 
+        gap: 1.5rem; /* Space between Image and Text */
+        width: 100%;
+    }
+
+    /* Photo Sizing */
+    .speaker-photo {
+        /* On phone, set a fixed small width */
+        width: 180px; 
+        height: auto; 
+        
+        /* Reset the desktop/tablet height constraints */
+        max-height: none; 
+        margin-bottom: 0; /* Gap handled by flex parent */
+    }
+
+    /* Typography */
+    .speaker-name {
+        font-size: 1.6rem; /* Smaller name */
+        margin-bottom: 0.5rem;
+    }
+
+    .speaker-role {
+        font-size: 0.9rem; /* Readable but compact */
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+
+    .speaker-company {
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+    }
+
+    /* Button */
+    .speaker-cta {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+    }
+
+    .speaker-banner--left::before {
+        background: none;
+    }
+}
+/* =============== GUESTS RESPONSIVE (Tablet & Mobile) =============== */
+
+/* 1. TABLET (Between 576px and 991px) */
+@media (max-width: 991.98px) {
+    
+    .featured-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 6rem 0;
+    }
+
+    .featured-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    /* KEY FIX: Use Grid to force exactly 2 items per row */
+    .featured-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 Columns */
+        
+        gap: 2rem; /* Tighter spacing than desktop */
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Override Bootstrap column widths so Grid controls the layout */
+    .featured-grid > [class*='col-'] {
+        width: auto !important;
+        max-width: 100% !important;
+        flex: none !important;
+    }
+
+    /* Adjust Image Size for Tablet */
+    .featured-img-wrapper {
+        height: 220px; 
+    }
+    
+    .featured-name {
+        font-size: 1.4rem;
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    
+    /* Force 1 column on small screens */
+    .featured-grid {
+        grid-template-columns: 1fr; 
+        gap: 3rem;
+    }
+
+    /* Smaller Styling */
+    .featured-img-wrapper {
+        height: 180px; 
+    }
+
+    .featured-title {
+        font-size: 1.8rem;
+    }
+}
+/* =============== TICKETS RESPONSIVE =============== */
+
+/* 1. TABLET (Between 576px and 991px) */
+@media (max-width: 991.98px) {
+    .tickets-section {
+        /* Unlock height so cards can stack without getting cut off */
+        height: auto; 
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .tickets-container {
+        /* Ensure nice spacing when they wrap */
+        gap: 4rem; 
+        padding-bottom: 2rem;
+    }
+
+    .tickets-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .ticket-card {
+        /* On tablet, let them sit 2 per row comfortably */
+        width: 45%; 
+        min-width: 320px; /* Don't get too skinny */
+        max-width: 400px;
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    
+    .tickets-section {
+        height: auto;
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .tickets-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .tickets-container {
+        flex-direction: column;
+        gap: 4rem; /* Large gap needed for the hanging button */
+    }
+
+    .ticket-card {
+        width: 100%;
+        max-width: 340px; /* Reasonable width for mobile */
+        
+        /* Reduce internal padding */
+        padding: 2rem 1.5rem 3.5rem 1.5rem; 
+    }
+
+    /* Smaller Pricing Font */
+    .ticket-price {
+        font-size: 2.2rem; 
+    }
+
+    .ticket-name {
+        font-size: 0.85rem;
+    }
+
+    /* Adjust button sizing */
+    .ticket-footer .speaker-cta {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+}
+/* =============== SCHEDULE RESPONSIVE =============== */
+
+/* 1. TABLET (Between 576px and 991px) */
+@media (max-width: 991.98px) {
+    
+    .schedule-section {
+        /* Unlock height for natural scrolling */
+        height: auto;
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .schedule-title {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    /* KEY FIX: Switch to 1 Column on Tablet for better readability */
+    .schedule-grid {
+        grid-template-columns: 1fr; 
+        
+        /* Large vertical gap to accommodate the absolute-positioned buttons */
+        gap: 4rem; 
+        
+        width: 100%;
+        max-width: 500px; /* Limit width so cards don't look stretched */
+    }
+    
+    .schedule-card {
+        width: 100%;
+        /* Ensure enough bottom margin/padding so button doesn't hit next card */
+        margin-bottom: 0; 
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    
+    .schedule-section {
+        height: auto;
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .schedule-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .schedule-grid {
+        grid-template-columns: 1fr; 
+        gap: 4rem; /* Keep gap large for buttons */
+        width: 100%;
+    }
+
+    /* Compact Card Styling */
+    .schedule-card {
+        width: 100%;
+        max-width: 340px;
+        
+        /* Reduce internal padding */
+        padding: 2rem 1.5rem 3.5rem 1.5rem; 
+    }
+
+    /* Smaller Typography */
+    .schedule-topic {
+        font-size: 1.6rem;
+    }
+
+    .schedule-date {
+        font-size: 0.9rem;
+    }
+
+    .schedule-body p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    /* Adjust button sizing */
+    .schedule-footer .speaker-cta {
+        padding: 0.6rem 2rem;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+}
+/* =============== CONTACT RESPONSIVE =============== */
+
+/* 1. TABLET (Between 576px and 991px) */
+@media (max-width: 991.98px) {
+    
+    .contact-section {
+        /* Unlock height so form doesn't get cut off */
+        height: auto; 
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .contact-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-desc {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+        width: 90%; /* Ensure text doesn't touch edges */
+    }
+
+    .contact-form-wrapper {
+        max-width: 500px;
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    
+    .contact-section {
+        height: auto;
+        min-height: 100vh;
+        
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .contact-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    .contact-form-wrapper {
+        width: 100%;
+        padding: 0 0.5rem; /* Small side padding */
+    }
+
+    /* Inputs */
+    .contact-label {
+        font-size: 0.85rem;
+    }
+
+    .contact-input {
+        font-size: 0.9rem; /* Prevent zoom on iOS (must be 16px ideally, but 0.9rem is close) */
+        padding: 0.7rem 1rem;
+    }
+
+    /* Full width button for easier tapping */
+    .contact-submit-btn {
+        width: 100%;
+        padding: 0.8rem 0;
+        font-size: 1rem;
+        margin-top: 1.5rem;
+    }
+}
+/* =============== PARTNERS & FOOTER RESPONSIVE =============== */
+
+/* 1. TABLET (Between 576px and 991px) */
+@media (max-width: 991.98px) {
+    
+    .partners-footer-section {
+        /* Unlock height for natural scrolling */
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* PARTNERS AREA */
+    .partners-area {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+        justify-content: center; /* Center grid vertically if space allows */
+    }
+
+    .partners-title {
+        font-size: 2.5rem;
+    }
+
+    /* Switch to 2 Columns for Tablet */
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 4rem;      /* Good spacing */
+        row-gap: 4rem;
+        margin-top: 3rem;
+    }
+
+    /* FOOTER AREA */
+    .main-footer {
+        text-align: left; /* Keep aligned left on tablet */
+        padding-top: 4rem;
+    }
+    
+    /* Adjust social icons alignment */
+    .social-icons {
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+}
+
+/* 2. PHONE (Max 575px) */
+@media (max-width: 575.98px) {
+    
+    .partners-footer-section {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    /* PARTNERS AREA */
+    .partners-area {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+    }
+
+    .partners-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Keep 2 Columns for logos on Phone (looks better than 1 giant logo) */
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 1.5rem;
+        row-gap: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    /* Make logos smaller */
+    .partner-logo img {
+        height: 40px; /* Fixed small height */
+    }
+
+    /* FOOTER AREA */
+    .main-footer {
+        padding-top: 3rem;
+        text-align: center; /* Center text for stacked mobile layout */
+    }
+
+    .footer-logo {
+        height: 50px; /* Smaller footer logo */
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* Center the social icons */
+    .col-lg-2 {
+        display: flex;
+        justify-content: center !important;
+        margin-top: 1.5rem;
+    }
+}
