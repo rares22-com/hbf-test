@@ -109,11 +109,14 @@
         <!-- RIGHT SIDE VIDEO -->
         <div class="hero-right">
             <div class="video-box position-relative">
-                <div class="ratio ratio-16x9 video-bg"></div>
+                
+                <div class="ratio ratio-16x9 video-iframe-wrapper">
+                    <video id="localVideoPlayer" width="100%" height="100%" autoplay muted loop playsinline style="object-fit: cover; border-radius: 2px;">
+                        <source src="images/prezentare.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
 
-                <button class="play-btn" type="button">
-                    <span class="play-triangle"></span>
-                </button>
             </div>
         </div>
 
@@ -160,13 +163,19 @@
             <div class="col-lg-6 text-center text-lg-center">
                 <div class="about-text-content">
                     <p>
-                        Hospitality Business Forum marchează prima ediție în România a unui concept inovator, dedicat investitorilor din industria hotelieră.
+                        Hospitality Business Forum returns in 2026 for its second edition, a unique event in Romania, dedicated exclusively to the financial dimension of the hotel industry.
+We bring, for the first time, international speakers, investors, analysts, and experts who shape global hospitality trends.
                     </p>
                     <p>
-                        Acest eveniment unic reunește proiecte hoteliere excepționale, experți în domenii de interes, instituții și persoane implicate în finanțare, precum și echipe specializate.
+                        The Forum addresses critical topics: investment strategies, capital attraction, profitable developments, asset management, and hotel exit scenarios.
+At a time when Romania is experiencing accelerated economic growth, HBF becomes the platform that connects the local industry with the real know-how of mature markets.
+
                     </p>
                     <p>
-                        Alătură-te primei ediții în România a unui forum dedicat exclusiv investitorilor din industria ospitalității!
+                        Our mission is to elevate the standard of conversation, deliver high-value insights rarely accessible in the region, and provide hospitality professionals in Romania with the tools needed to build hotels, brands, and destinations competitive at an international level.
+                    </p>
+                    <p>
+                        HBF 2026: where Romania’s hospitality industry meets the expertise that can shape its future.
                     </p>
                 </div>
             </div>
@@ -202,16 +211,16 @@
 
             <div class="speaker-banner speaker-banner--left">
                 <div class="speaker-text">
-                    <h3 class="speaker-name">David Jenkins</h3>
+                    <h3 class="speaker-name">Michael Jalbert</h3>
                     <p class="speaker-role">
-                        Vice President Business<br>
-                        Development Eastern Europe<br>
-                        <span class="speaker-company">RADISSON HOTEL GROUP</span>
+                        Chief Executive Office<br>
+                        Member of the Board<br>
+                        <span class="speaker-company">Forbes Global Properties</span>
                     </p>
                     <a href="#tickets" class="speaker-cta">Sign up now</a>
                 </div>
                 <div class="speaker-photo-wrapper">
-                    <img src="images/david-jenkins.png" alt="David Jenkins" class="speaker-photo">
+                    <img src="images/michael-jalbert.png" alt="Michael Jalbert" class="speaker-photo">
                 </div>
             </div>
 
@@ -326,12 +335,15 @@
             
             <div class="ticket-card">
                 <div class="ticket-header">
-                    <span class="ticket-name">EARLY BIRD - 28 Ianuarie</span>
-                    <div class="ticket-price">$229</div>
+                    <span class="ticket-name">EARLY BIRD - 20 Ianuarie</span>
+                    <span class="ticket-name">STANDARD PASS</span>
+                    <div class="ticket-price">€149</div>
                 </div>
                 <div class="ticket-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Access to all HBF 2026 panels and presentations<br>
+                        Access to the general Q&A session<br>
+                        Access to coffee breaks & networking
                     </p>
                 </div>
                 <div class="ticket-footer">
@@ -345,12 +357,17 @@
 
             <div class="ticket-card">
                 <div class="ticket-header">
-                    <span class="ticket-name">REGULAR - 28 Ianuarie</span>
-                    <div class="ticket-price">$329</div>
+                    <span class="ticket-name">EARLY BIRD - 20 Ianuarie</span>
+                    <span class="ticket-name">BUSINESS PASS</span>
+                    <div class="ticket-price">€249</div>
                 </div>
                 <div class="ticket-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Access to all HBF 2026 panels and presentations<br>
+                        Access to the general Q&A session<br>
+                        Access to coffee breaks & networking<br>
+                        Access to the HBF Report 2026 (digital edition)<br>
+                        Access to the Matchmaking Session (dedicated room – requires prior registration)
                     </p>
                 </div>
                 <div class="ticket-footer">
@@ -364,12 +381,13 @@
 
             <div class="ticket-card ticket-card--vip">
                 <div class="ticket-header">
-                    <span class="ticket-name">VIP PACKAGE</span>
-                    <div class="ticket-price">$529</div>
+                    <span class="ticket-name">EARLY BIRD - 20 Ianuarie</span>
+                    <span class="ticket-name">TEAM PASS (price for 3 participants)</span>
+                    <div class="ticket-price">€349</div>
                 </div>
                 <div class="ticket-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        All benefits included in the corresponding individual packages, at a discounted rate for teams from the same company.
                     </p>
                 </div>
                 <div class="ticket-footer">
@@ -395,12 +413,13 @@
             
             <div class="schedule-card">
                 <div class="schedule-header">
-                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
-                    <h3 class="schedule-topic">Finance</h3>
+                    <span class="schedule-date">10:00 – 11:30</span>
+                    <h3 class="schedule-topic">Investment & Financing</h3>
                 </div>
                 <div class="schedule-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        How hotel investments are structured and what tools entrepreneurs can use.<br><br>
+                        Topics: what investors look for, approaching family offices, banking perspectives, independent vs. franchise, risks & opportunities in Eastern Europe.
                     </p>
                 </div>
                 <div class="schedule-footer">
@@ -410,12 +429,13 @@
 
             <div class="schedule-card">
                 <div class="schedule-header">
-                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
-                    <h3 class="schedule-topic">Finance</h3>
+                    <span class="schedule-date">12:00 – 13:30</span>
+                    <h3 class="schedule-topic">Real Estate & Hotel Transactions</h3>
                 </div>
                 <div class="schedule-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        How hotels are bought and sold and how to avoid costly mistakes.<br><br>
+                        Topics: proper valuation, due diligence, exit strategies, branded residences as value multipliers, collaboration with luxury real estate agencies.
                     </p>
                 </div>
                 <div class="schedule-footer">
@@ -425,12 +445,13 @@
 
             <div class="schedule-card">
                 <div class="schedule-header">
-                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
-                    <h3 class="schedule-topic">Finance</h3>
+                    <span class="schedule-date">14:30 – 16:00</span>
+                    <h3 class="schedule-topic">Marketing & Sales in Hospitality</h3>
                 </div>
                 <div class="schedule-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        Practical tools for visibility and revenue growth.<br><br>
+                        Topics: hotel branding, digital marketing, OTA vs. direct booking, PR & influencers, selling hotels internationally, revenue management.
                     </p>
                 </div>
                 <div class="schedule-footer">
@@ -440,12 +461,13 @@
 
             <div class="schedule-card">
                 <div class="schedule-header">
-                    <span class="schedule-date">19 Ianuarie - Ora 13:30</span>
-                    <h3 class="schedule-topic">Finance</h3>
+                    <span class="schedule-date">16:15 – 17:45</span>
+                    <h3 class="schedule-topic">Entrepreneurship in Hospitality</h3>
                 </div>
                 <div class="schedule-body">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+                        A practical guide for both new and established entrepreneurs.<br><br>
+                        Topics: first steps in HoReCa, choosing the right concept (boutique, resort, luxury), team structure and key roles.
                     </p>
                 </div>
                 <div class="schedule-footer">
