@@ -6,7 +6,7 @@ html, body {
     overflow-x: clip;
     scroll-behavior: smooth;
     /* snap one full page at a time */
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
 }
 
 body.homepage {
@@ -960,30 +960,26 @@ body.homepage {
     }
 }
 
-/* =============== SCHEDULE SECTION =============== */
+/* =============== SCHEDULE SECTION (TABLE) =============== */
 
 .schedule-section {
     background: url("../images/speakers-bg.png") center center / cover no-repeat;
-    
     /* Fixed full-screen height minus navbar */
-    height: calc(100vh - 96px);
-    min-height: 800px;
+    height: auto;
+    min-height: calc(100vh - 96px);
     
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    
-    padding-top: 3vh;
-    padding-bottom: 2vh;
-    
+    padding-top: 5vh;
+    padding-bottom: 5vh;
 }
 
 .schedule-section .section-inner {
     width: 100%;
-    max-width: 1600px; /* Increased container width to allow wider grid */
+    max-width: 1400px; 
     margin: 0 auto;
     padding: 0 2rem;
-    
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -993,122 +989,110 @@ body.homepage {
     font-size: clamp(2.5rem, 4vw, 4rem);
     font-weight: 700;
     text-align: center;
-    margin-bottom: 2vh; 
+    margin-bottom: 4vh; 
     flex-shrink: 0;
 }
 
-.schedule-grid {
-    display: grid;
-    /* Force 2 columns */
-    grid-template-columns: repeat(2, 1fr); 
-    
-    /* Responsive spacing */
-    gap: clamp(2rem, 3vw, 4rem);
-    row-gap: clamp(2rem, 4vh, 3rem); /* More vertical gap for the buttons to hang comfortably */
-    
-    /* CENTERING FIX: Ensure the grid itself is centered */
-    justify-content: center;
-    justify-items: center; /* Centers the cards inside the grid cells */
-    
-    /* SHAPE FIX: Wider max-width allows cards to be rectangles instead of towers */
-    max-width: 1400px; 
-    width: 100%;
-    margin: 0 auto; /* Essential for centering the block */
-    
-    /* Center vertically in remaining space */
-    align-content: center; 
+/* Table Wrapper (allows centering and potential scroll) */
+.schedule-table-wrapper {
     flex-grow: 1;
-}
-
-/* Individual Card */
-.schedule-card {
-    position: relative; 
-    
-    border: 1px solid rgba(244, 180, 76, 0.3);
-    border-radius: 2.5rem;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    
-    /* SHAPE FIX: Reduced top/bottom padding to make it less "tall" */
-    padding: 2.5rem 2rem 3.5rem 2rem;
-    
-    
-    /* SHAPE FIX: Allow width to stretch to fill the wider grid */
-    width: clamp(300px, 30vw, 550px);
-    
-    margin-bottom: 2rem; 
-    
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-    
-    /* Ensure equal height for all cards in the row */
-    
+    justify-content: center; /* Vertically center table */
+
 }
 
-.schedule-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(244, 180, 76, 0.8);
-}
-
-/* Content Styling */
-.schedule-header {
-    margin-bottom: 1.5rem;
-}
-
-.schedule-date {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.schedule-topic {
-    font-family: "Unbounded", sans-serif;
-    font-size: clamp(1.5rem, 2vw, 2.2rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: #ffffff;
-    margin: 0;
-}
-
-.schedule-body p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 0;
-    /* SHAPE FIX: Widen the text area so text wraps less (making card shorter) */
-    max-width: 90%; 
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Footer: The Button Container */
-.schedule-footer {
-    position: absolute;
-    bottom: 0;
-    left: 0; 
+.schedule-table {
     width: 100%;
-    transform: translateY(50%); 
-    
-    display: flex;
-    justify-content: center;
-    z-index: 2;
+    border-collapse: separate;
+    border-spacing: 0 1rem; /* Space between rows */
 }
 
-.schedule-footer .speaker-cta {
-    background-color: #000000; 
-    padding: 0.8rem 2.5rem;
+.schedule-table thead th {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left;
 }
 
-.schedule-footer .speaker-cta:hover {
-    background-color: #f4b44c; 
-    color: #000;
+/* Row Styling */
+.schedule-table tbody tr {
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Responsive Tweaks */
+.schedule-table tbody tr:hover {
+    background-color: rgba(20, 20, 20, 0.6);
+    box-shadow: 0 4px 20px rgba(244, 180, 76, 0.1); /* Subtle gold glow */
+}
+
+/* Cells */
+.schedule-table td {
+    padding: 1.5rem 1rem;
+    vertical-align: middle;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Round corners for first and last cells */
+.schedule-table td:first-child {
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.schedule-table td:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Column Specifics */
+.time-cell {
+    font-family: "Unbounded", sans-serif;
+    font-weight: 600;
+    color: #f4b44c; /* Gold time */
+    font-size: 1.1rem;
+    white-space: nowrap;
+    width: 15%;
+}
+
+.topic-cell {
+    font-size: 1.3rem;
+    font-weight: 700;
+    width: 25%;
+}
+
+.details-cell {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.text-muted-small {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 0.4rem;
+}
+
+.action-cell {
+    text-align: center;
+    width: 15%;
+}
+
+/* Small Button Variant */
+.speaker-cta.btn-sm {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* =============== SCHEDULE RESPONSIVE (Table) =============== */
+
+/* Tablet & Mobile: Stack the table cells */
 @media (max-width: 991.98px) {
     .schedule-section {
         height: auto;
@@ -1116,11 +1100,61 @@ body.homepage {
         padding: 5rem 0;
     }
 
-    .schedule-grid {
-        /* Switch to 1 column on tablet/mobile */
-        grid-template-columns: 1fr;
-        gap: 4rem; 
-        max-width: 500px;
+    .schedule-table thead {
+        display: none; /* Hide headers on mobile */
+    }
+
+    .schedule-table, 
+    .schedule-table tbody, 
+    .schedule-table tr, 
+    .schedule-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .schedule-table tr {
+        margin-bottom: 2rem;
+        background-color: rgba(0,0,0,0.4);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 1rem;
+    }
+
+    .schedule-table td {
+        padding: 0 0;
+        border: none !important; /* Remove cell borders */
+        text-align: center; /* Center everything on mobile */
+    }
+
+    /* Reset border radius for cells since we use row radius */
+    .schedule-table td:first-child,
+    .schedule-table td:last-child {
+        border-radius: 0;
+    }
+
+    .time-cell {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        color: #f4b44c;
+    }
+
+    .topic-cell {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .details-cell {
+        margin-bottom: 1.5rem;
+    }
+
+    .action-cell {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .speaker-cta.btn-sm {
+        width: 100%;
+        max-width: 200px;
     }
 }
 
@@ -2160,40 +2194,7 @@ select.contact-input {
 }
 /* =============== SCHEDULE RESPONSIVE =============== */
 
-/* 1. TABLET (Between 576px and 991px) */
-@media (max-width: 991.98px) {
-    
-    .schedule-section {
-        /* Unlock height for natural scrolling */
-        height: auto;
-        min-height: 100vh;
-        
-        padding-top: 6rem;
-        padding-bottom: 6rem;
-    }
 
-    .schedule-title {
-        font-size: 2.5rem;
-        margin-bottom: 3rem;
-    }
-
-    /* KEY FIX: Switch to 1 Column on Tablet for better readability */
-    .schedule-grid {
-        grid-template-columns: 1fr; 
-        
-        /* Large vertical gap to accommodate the absolute-positioned buttons */
-        gap: 4rem; 
-        
-        width: 100%;
-        max-width: 500px; /* Limit width so cards don't look stretched */
-    }
-    
-    .schedule-card {
-        width: 100%;
-        /* Ensure enough bottom margin/padding so button doesn't hit next card */
-        margin-bottom: 0; 
-    }
-}
 
 /* 2. PHONE (Max 575px) */
 @media (max-width: 575.98px) {
